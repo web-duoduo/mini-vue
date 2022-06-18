@@ -4,7 +4,7 @@
  * @Autor: jxj
  * @Date: 2022-06-16 19:12:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-17 22:11:29
+ * @LastEditTime: 2022-06-18 17:42:10
  */
 import { readonly, isReadonly } from "../reactive";
 describe("readonly", () => {
@@ -15,6 +15,10 @@ describe("readonly", () => {
     expect(wrapped).not.toBe(original);
     expect(isReadonly(wrapped)).toBe(true)
     expect(isReadonly(original)).toBe(false)
+
+
+    expect(isReadonly(wrapped.bar)).toBe(true)
+    expect(isReadonly(original.bar)).toBe(false)
     expect(wrapped.foo).toBe(1);
   });
 

@@ -4,7 +4,7 @@
  * @Autor: jxj
  * @Date: 2022-06-15 21:50:05
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-17 22:04:07
+ * @LastEditTime: 2022-06-18 17:16:53
  */
 import { reactive, isReactive } from "../reactive";
 
@@ -14,7 +14,21 @@ describe("reactive", () => {
     const observed = reactive(original);
     expect(observed).not.toBe(original);
     expect(observed.foo).toBe(1);
-    expect(isReactive(observed)).toBe(true)
-    expect(isReactive(original)).toBe(false)
+    expect(isReactive(observed)).toBe(true);
+    expect(isReactive(original)).toBe(false);
+  });
+
+  test("nested reactive", () => {
+    const original = {
+      nested: {
+        foo: 1,
+      },
+      array: [{ bar: 2 }],
+    };
+
+    const observed = reactive(original);
+    expect(isReactive(observed.nested)).toBe(true);
+    expect(isReactive(observed.array)).toBe(true);
+    expect(isReactive(observed.array[0])).toBe(true);
   });
 });
