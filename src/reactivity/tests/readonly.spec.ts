@@ -4,9 +4,9 @@
  * @Autor: jxj
  * @Date: 2022-06-16 19:12:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-18 22:00:50
+ * @LastEditTime: 2022-06-18 22:15:11
  */
-import { readonly, isReadonly } from "../reactive";
+import { readonly, isReadonly, isProxy } from "../reactive";
 describe("readonly", () => {
   it("happy path", () => {
     // not set
@@ -16,9 +16,11 @@ describe("readonly", () => {
     expect(isReadonly(wrapped)).toBe(true)
     expect(isReadonly(original)).toBe(false)
 
-
+    // 嵌套对象
     expect(isReadonly(wrapped.bar)).toBe(true)
     expect(isReadonly(original.bar)).toBe(false)
+    // isProxy
+    expect(isProxy(wrapped)).toBe(true)
     expect(wrapped.foo).toBe(1);
   });
 

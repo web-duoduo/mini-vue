@@ -4,7 +4,7 @@
  * @Autor: jxj
  * @Date: 2022-06-15 22:13:01
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-18 20:40:31
+ * @LastEditTime: 2022-06-18 22:15:28
  */
 
 import { mutableHandlers, readonlyHandlers, shallowReadonlyHandlers } from "./baseHandlers";
@@ -33,6 +33,10 @@ export function isReactive (value) {
 
 export function isReadonly (value) {
   return !!value[ReactiveFlags.IS_READONLY]
+}
+
+export function isProxy (value) {
+  return isReactive(value) || isReadonly(value)
 }
 
 function createActiveObject(raw:any, baseHandlers) {
