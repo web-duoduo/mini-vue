@@ -4,10 +4,10 @@
  * @Autor: jxj
  * @Date: 2022-06-15 22:13:01
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-17 22:09:00
+ * @LastEditTime: 2022-06-18 20:40:31
  */
 
-import { mutableHandlers, readonlyHandlers } from "./baseHandlers";
+import { mutableHandlers, readonlyHandlers, shallowReadonlyHandlers } from "./baseHandlers";
 
 export const enum ReactiveFlags {
   IS_REACTIVE = '__v_isReactive',
@@ -20,6 +20,10 @@ export function reactive(raw) {
 
 export function readonly(raw) {
   return createActiveObject(raw, readonlyHandlers)
+}
+
+export function shallowReadonly (raw) {
+  return createActiveObject(raw, shallowReadonlyHandlers)
 }
 
 export function isReactive (value) {

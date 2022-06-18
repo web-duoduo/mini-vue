@@ -4,18 +4,19 @@
  * @Autor: jxj
  * @Date: 2022-06-16 19:51:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-18 17:44:07
+ * @LastEditTime: 2022-06-18 21:32:25
  */
 
 import { track, trigger } from "./effect";
 import { ReactiveFlags, reactive, readonly } from "./reactive";
-import { isObject } from "../shared";
+import { extend, isObject } from "../shared";
 
 const get = createGetter();
 const set = createSetter();
 const readonlyGet = createGetter(true);
+const shallowReadonlyGet = createGetter(true, true);
 
-function createGetter(isReadonly = false) {
+function createGetter(isReadonly = false, shallow = false) {
   return function get(target, key) {
     if (key === ReactiveFlags.IS_REACTIVE) {
       return !isReadonly;
@@ -23,6 +24,11 @@ function createGetter(isReadonly = false) {
       return isReadonly;
     }
     const res = Reflect.get(target, key);
+
+    // shallow 类型
+    if (shallow) {
+      return res;
+    }
 
     // 处理嵌套对象
     // 判断res 是否为对象类型
@@ -58,3 +64,7 @@ export const readonlyHandlers = {
     return true;
   },
 };
+
+export const shallowReadonlyHandlers = extend({}, readonlyHandlers, {
+  get: shallowReadonlyGet  
+})

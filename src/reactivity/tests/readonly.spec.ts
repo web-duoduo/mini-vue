@@ -4,7 +4,7 @@
  * @Autor: jxj
  * @Date: 2022-06-16 19:12:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-18 17:42:10
+ * @LastEditTime: 2022-06-18 22:00:50
  */
 import { readonly, isReadonly } from "../reactive";
 describe("readonly", () => {
@@ -23,7 +23,7 @@ describe("readonly", () => {
   });
 
 
-  it("warn then call set", () => {
+  it("should call console.warn when set", () => {
     // console.warn()
     // mock
     console.warn = jest.fn()
