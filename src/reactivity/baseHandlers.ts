@@ -4,7 +4,7 @@
  * @Autor: jxj
  * @Date: 2022-06-16 19:51:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-06-18 21:32:25
+ * @LastEditTime: 2022-06-22 16:13:40
  */
 
 import { track, trigger } from "./effect";
@@ -66,5 +66,5 @@ export const readonlyHandlers = {
 };
 
 export const shallowReadonlyHandlers = extend({}, readonlyHandlers, {
-  get: shallowReadonlyGet  
-})
+  get: shallowReadonlyGet,
+});
